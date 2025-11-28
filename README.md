@@ -85,6 +85,32 @@ If you use `gh` (GitHub CLI), you can add the required secrets quickly from the 
 ```
 
 The script will prompt for token values and set the secrets via GH CLI for this repository.
+
+### Helper: Create a new GitHub repository and push local code
+If you don't have a GitHub repo yet or would like to create a fresh one, the `gh` CLI script `scripts/create-and-push-repo.sh` automates the process.
+
+Prerequisites:
+- Install `gh` (GitHub CLI) and `git`
+- Authenticate `gh`: `gh auth login`
+
+Usage:
+```bash
+# Make the script executable if not already:
+chmod +x ./scripts/create-and-push-repo.sh
+
+# Run it interactively:
+./scripts/create-and-push-repo.sh
+
+# Or pass flags:
+./scripts/create-and-push-repo.sh --name parsu-admin-dashboard --visibility public --owner YOUR_GITHUB_USERNAME
+```
+
+After the script runs, it will:
+- Create a new GitHub repo
+- Set `origin` as the remote
+- Push the current branch (usually `main`)
+
+If you have an existing `origin` that you want to keep, don't run the script; rename or modify remotes manually.
 ### 3. Update Database Queries
 
 Replace the mock data in `app.js` with actual Supabase queries. Example:
