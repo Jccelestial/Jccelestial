@@ -60,6 +60,31 @@ Add this to your `index.html` before the closing `</body>` tag:
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 ```
 
+### GitHub Actions: auto-deploy from main
+
+This repository includes a GitHub Actions workflow that automatically deploys the site to Vercel on each push to `main`.
+
+File: `.github/workflows/vercel-deploy.yml`
+
+Required GitHub repository secrets (setup in **Settings → Secrets and variables → Actions**) before the Action will deploy successfully:
+- `VERCEL_TOKEN` — a Vercel personal token. Create it in Vercel: Account → Tokens → Create Token
+- `VERCEL_ORG_ID` — your Vercel organization/team id
+- `VERCEL_PROJECT_ID` — the Vercel project id
+
+Once these are configured, any push to `main` will trigger a production deploy.
+
+> Tip: You can find `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` via the Vercel dashboard or run `vercel projects ls` with the Vercel CLI.
+
+### Helper: Set secrets via GitHub CLI
+If you use `gh` (GitHub CLI), you can add the required secrets quickly from the command line using the helper script included in this repo:
+
+```bash
+# Example usage (after installing gh and logging in):
+# Set environment variables before running the script or pass the token values interactively.
+./scripts/setup-vercel-secrets.sh
+```
+
+The script will prompt for token values and set the secrets via GH CLI for this repository.
 ### 3. Update Database Queries
 
 Replace the mock data in `app.js` with actual Supabase queries. Example:
